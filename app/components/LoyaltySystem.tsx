@@ -6,6 +6,7 @@ import { BellIcon } from '@heroicons/react/24/outline';
 import SystemInfo from './SystemInfo';
 import { MetadataRecord } from '../types/loyalty';
 import { ContractABI } from '../types/contracts';
+import Image from 'next/image';
 
 interface UserTier {
   level: 'Bronze' | 'Silver' | 'Gold';
@@ -185,7 +186,13 @@ function Leaderboard({ entries }: { entries: LeaderboardEntry[] }) {
               <span className="text-lg font-bold w-8">{entry.rank}</span>
               <div className="flex items-center space-x-3">
                 {entry.avatar ? (
-                  <img src={entry.avatar} alt={`${entry.name}'s avatar`} className="w-10 h-10 rounded-full" />
+                  <Image
+                    src={entry.avatar}
+                    alt={`${entry.name}'s avatar`}
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
                 ) : (
                   <div className="w-10 h-10 rounded-full bg-blue-500/20" />
                 )}
