@@ -1,5 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-onchain`]().
+# Base Loyalty System
 
+This is a [Next.js](https://nextjs.org) project for a blockchain-based loyalty system, bootstrapped with [`create-onchain`](). It leverages the Base network and CDP tools to provide a comprehensive loyalty program.
+
+## Features
+
+- **User Registration**: Connect through Coinbase Wallet for multi-network support.
+- **Identity Verification**: Uses OnchainKit's Identity Components for human-readable Basenames.
+- **Data Management**: Powered by CDP's Data API for real-time balance tracking and historical data analysis.
+- **Points Accumulation**: Implemented as ERC20 tokens, with real-time updates via CDP Webhooks.
+- **Tier System**: Deploys ERC721 NFTs for Bronze, Silver, and Gold status.
+- **Reward Redemption**: Handled by Base smart contracts, issuing ERC20 tokens as rewards.
+- **Notifications**: Real-time updates powered by CDP Webhooks.
+- **Analytics**: Uses CDP Events Indexer for personalized reward experiences.
 
 ## Getting Started
 
