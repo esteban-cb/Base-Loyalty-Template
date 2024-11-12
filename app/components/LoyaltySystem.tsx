@@ -2,9 +2,10 @@
 
 import { useAccount } from 'wagmi';
 import { useState, useEffect } from 'react';
-import { BellIcon, ChartBarIcon, TrophyIcon, HomeIcon, PlusCircleIcon, ShoppingBagIcon, ClockIcon, CogIcon } from '@heroicons/react/24/outline';
-import { cdpData, contractData, eventData, analyticsData } from '../lib/dummyData';
+import { BellIcon } from '@heroicons/react/24/outline';
 import SystemInfo from './SystemInfo';
+import { MetadataRecord } from '../types/loyalty';
+import { ContractABI } from '../types/contracts';
 
 interface UserTier {
   level: 'Bronze' | 'Silver' | 'Gold';
@@ -43,11 +44,12 @@ interface DashboardStats {
 
 interface Activity {
   id: string;
-  type: 'point_earn' | 'reward_claim' | 'tier_upgrade' | 'referral';
+  type: 'point_earn' | 'reward_claim' | 'tier_upgrade' | 'referral' | 'achievement';
   description: string;
   timestamp: string;
   points?: number;
-  metadata?: Record<string, any>;
+  metadata?: MetadataRecord;
+  status?: 'completed' | 'pending' | 'failed';
 }
 
 interface LeaderboardEntry {
@@ -59,19 +61,19 @@ interface LeaderboardEntry {
 }
 
 interface RewardContract {
-  address: string;
-  network: 'mainnet' | 'testnet';
-  type: 'erc20' | 'erc721';
-  abi: any;
-}
+    address: string;
+    network: 'mainnet' | 'testnet';
+    type: 'erc20' | 'erc721';
+    abi: ContractABI[];
+  }
 
-interface CDPEvent {
-  id: string;
-  type: string;
-  timestamp: string;
-  data: Record<string, any>;
-  network: string;
-}
+  interface CDPEvent {
+    id: string;
+    type: string;
+    timestamp: string;
+    data: MetadataRecord;
+    network: string;
+  }
 
 interface NetworkConfig {
   id: number;
@@ -79,6 +81,12 @@ interface NetworkConfig {
   rpcUrl: string;
   explorer: string;
   contracts: Record<string, string>;
+}
+
+interface CDPMetric {
+  method: string;
+  calls: number;
+  growth: string;
 }
 
 function DashboardOverview({ stats }: { stats: DashboardStats }) {
@@ -177,7 +185,7 @@ function Leaderboard({ entries }: { entries: LeaderboardEntry[] }) {
               <span className="text-lg font-bold w-8">{entry.rank}</span>
               <div className="flex items-center space-x-3">
                 {entry.avatar ? (
-                  <img src={entry.avatar} className="w-10 h-10 rounded-full" />
+                  <img src={entry.avatar} alt={`${entry.name}'s avatar`} className="w-10 h-10 rounded-full" />
                 ) : (
                   <div className="w-10 h-10 rounded-full bg-blue-500/20" />
                 )}
