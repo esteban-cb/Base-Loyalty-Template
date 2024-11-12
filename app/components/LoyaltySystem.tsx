@@ -211,6 +211,52 @@ function Leaderboard({ entries }: { entries: LeaderboardEntry[] }) {
   );
 }
 
+interface DummyUserData {
+  basename: string;
+  registrationDate: string;
+  points: {
+    balance: number;
+    lifetime: number;
+  };
+  stats: {
+    community: {
+      totalUsers: number;
+      last24h: number;
+      weeklyGrowth: string;
+      monthlyGrowth: string;
+      activeRegions: Array<{ name: string; users: number }>;
+    };
+    pointsEconomy: {
+      totalPoints: string;
+      redemptionRate: string;
+      averageHolding: number;
+      distribution: {
+        rewards: string;
+        referrals: string;
+        engagement: string;
+      };
+    };
+    engagement: {
+      score: number;
+      growth: string;
+      breakdown: {
+        daily: number;
+        weekly: number;
+        monthly: number;
+      };
+    };
+  };
+  topMembers: Array<{
+    rank: number;
+    basename: string;
+    points: number;
+    tier: string;
+    joinDate: string;
+    achievements: number;
+  }>;
+  recentActivity: Activity[];
+}
+
 export default function LoyaltySystem() {
   const { address, isConnected } = useAccount();
   const [showNotifications, setShowNotifications] = useState(false);
@@ -232,6 +278,7 @@ export default function LoyaltySystem() {
   // Enhanced dummy data
   const dummyUserData = {
     basename: 'crypto.base',
+    registrationDate: '2024-01-01T00:00:00Z',
     stats: {
       community: {
         totalUsers: 1500,

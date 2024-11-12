@@ -112,6 +112,12 @@ export const analyticsData = {
 };
 
 export const dummyUserData = {
+  basename: "user.base",
+  registrationDate: "2024-01-01T00:00:00Z",
+  points: {
+    balance: 750,
+    lifetime: 2500
+  },
   stats: {
     community: {
       totalUsers: 15423,
