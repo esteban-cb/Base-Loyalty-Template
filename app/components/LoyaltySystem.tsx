@@ -56,6 +56,7 @@ interface Activity {
 interface LeaderboardEntry {
   rank: number;
   basename: string;
+  name: string;
   points: number;
   tier: string;
   avatar?: string;
@@ -188,7 +189,7 @@ function Leaderboard({ entries }: { entries: LeaderboardEntry[] }) {
                 {entry.avatar ? (
                   <Image
                     src={entry.avatar}
-                    alt={`${entry.name}'s avatar`}
+                    alt={`${entry.basename}'s avatar`}
                     width={40}
                     height={40}
                     className="rounded-full"
@@ -331,6 +332,7 @@ export default function LoyaltySystem() {
     topMembers: [
       {
         rank: 1,
+        basename: 'John Doe',
         name: 'John Doe',
         points: 15000,
         avatar: '/avatars/user1.jpg',
@@ -338,17 +340,11 @@ export default function LoyaltySystem() {
       },
       {
         rank: 2,
+        basename: 'Jane Smith',
         name: 'Jane Smith',
         points: 12500,
         avatar: '/avatars/user2.jpg',
         tier: 'Silver'
-      },
-      {
-        rank: 3,
-        name: 'Mike Johnson',
-        points: 10000,
-        avatar: '/avatars/user3.jpg',
-        tier: 'Bronze'
       }
     ],
   };
